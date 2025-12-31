@@ -1,0 +1,6 @@
+if SHIELD_ZABUROH
+
+config ZMK_KEYBOARD_NAME
+    default "zaburoh"
+
+endif # SHIELD_ZABUROH
