@@ -20,5 +20,3 @@
 include:
   - board: xiao_ble
     shield: zaburoh
-
----
