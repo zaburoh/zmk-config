@@ -16,23 +16,14 @@
         // If the hardware does not use a switch matrix, change this to the
         // appropriate driver and update the properties below to match.
         // See https://zmk.dev/docs/config/kscan for supported key scan drivers.
-        compatible = "zmk,kscan-gpio-matrix";
-        // Set this to "col2row" or "row2col" to match the hardware. If using
-        // "row2col", change the col-gpios to (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
-        // and the row-gpios to GPIO_ACTIVE_HIGH.
-        diode-direction = "col2row";
+        compatible = "zmk,kscan-gpio-direct";
         wakeup-source;
 
-        // Replace these comments with the GPIO pins in the matrix.
-        // See https://zmk.dev/docs/development/hardware-integration/new-shield#shield-overlays
-        col-gpios
-            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
-            ;
-
-        row-gpios
-            = <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        input-gpios
+            = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&xiao_d 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             ;
     };
 
