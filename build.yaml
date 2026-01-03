@@ -36,4 +36,9 @@
 
 #
 
-include: []
+include:
+  # -------------------
+  # Your keyboards here
+  # -------------------
+  - board: xiao_ble # Replace with the Xiao-compatible board you're using
+    shield: tester_xiao
