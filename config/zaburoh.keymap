@@ -1,0 +1,17 @@
+// Local keymap override for the zaburoh shield.
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp A &kp B
+                &kp C &kp D
+            >;
+        };
+    };
+};
