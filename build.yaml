@@ -105,6 +105,6 @@ include:
   # -------------------
 
 
-  - board: xiao_ble
+  - board: seeeduino_xiao_ble
     shield: zaburoh
     snippet: studio-rpc-usb-uart
