@@ -20,6 +20,6 @@
     };
 
     &default_transform {
-      col-offset = <4>
-    }
+      col-offset = <4>;
+    };
 };
