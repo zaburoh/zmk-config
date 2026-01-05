@@ -112,3 +112,6 @@ include:
 
   - board: seeeduino_xiao_ble
     shield: zaburoh_right
+
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
