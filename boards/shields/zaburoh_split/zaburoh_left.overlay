@@ -1,3 +1,5 @@
+#include "zaburoh.dtsi"
+
 / {
     kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
