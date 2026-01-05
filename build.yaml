@@ -107,3 +107,4 @@ include:
 
   - board: xiao_ble
     shield: zaburoh
+    snippet: studio-rpc-usb-uart
