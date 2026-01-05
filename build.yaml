@@ -106,6 +106,9 @@ include:
 
 
   - board: seeeduino_xiao_ble
-    shield: zaburoh
+    shield: zaburoh_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+
+  - board: seeeduino_xiao_ble
+    shield: zaburoh_right
