@@ -12,7 +12,7 @@
 
         default_layer {
             bindings = <
-                &kp A &kp K &kp S &kp A
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3
                 &kp T &kp N &kp H &kp I
                 &kp M &kp Y &kp R &kp U
                 &studio_unlock &kp W &kp COMMA &kp E
