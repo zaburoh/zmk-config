@@ -9,7 +9,7 @@
 / {
     chosen {
         zmk,physical-layout = &default_layout;
-        zmk,matrix-transform = &default_transform;
+        // zmk,matrix-transform = &default_transform;
         zmk,kscan = &kscan;
     };
 
