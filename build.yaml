@@ -108,3 +108,4 @@ include:
   - board: seeeduino_xiao_ble
     shield: zaburoh
     snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
