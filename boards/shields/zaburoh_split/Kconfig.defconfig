@@ -1,7 +1,7 @@
 if SHIELD_ZABUROH_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "zaburoh-splitd"
+    default "zaburoh-split"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
