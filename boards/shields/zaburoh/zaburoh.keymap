@@ -15,7 +15,7 @@
                 &kp A &kp K &kp S &kp A
                 &kp T &kp N &kp H &kp I
                 &kp M &kp Y &kp R &kp U
-                &kp EXCLAMATION &kp W &kp COMMA &kp E
+                &studio_unlock &kp W &kp COMMA &kp E
                 &kp BACKSPACE &kp SPACE &kp RETURN &kp O
             >;
         };
