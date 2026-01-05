@@ -1,5 +1,9 @@
 #include "zaburoh.dtsi"
 
+&default_transform {
+    col-offset = <4>;
+};
+
 / {
     kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
@@ -17,9 +21,5 @@
             = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
-    };
-
-    &default_transform {
-      col-offset = <4>;
     };
 };
