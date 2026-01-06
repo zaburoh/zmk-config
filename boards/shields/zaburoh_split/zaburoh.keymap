@@ -10,7 +10,27 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        default_layer { // Layer 0
+            bindings = <
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &out OUT_TOG &kp A &kp B &kp C
+                &kp T &kp N &kp H &kp I &kp D &kp E &kp F
+                &kp M &kp Y &kp R &kp U
+                &studio_unlock &kp W &kp COMMA &kp E
+                &kp BACKSPACE &kp SPACE &mo 1 &mo 2
+            >;
+        };
+
+        setting_layer { // Layer 1
+            bindings = <
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &out OUT_TOG &kp A &kp B &kp C
+                &kp T &kp N &kp H &kp I &kp D &kp E &kp F
+                &kp M &kp Y &kp R &kp U
+                &studio_unlock &kp W &kp COMMA &kp E
+                &kp BACKSPACE &kp SPACE &kp RETURN &kp O
+            >;
+        };
+
+        special_layer { // Layer 2
             bindings = <
                 &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &out OUT_TOG &kp A &kp B &kp C
                 &kp T &kp N &kp H &kp I &kp D &kp E &kp F
