@@ -1,0 +1,9 @@
+if SHIELD_ZABUROH
+
+config ZMK_KEYBOARD_NAME
+    default "zaburoh_stick"
+
+config ZMK_POINTING
+    default y
+
+endif # SHIELD_ZABUROH
