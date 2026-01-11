@@ -3,8 +3,13 @@
 // instructions.
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 #include "zaburoh_stick-layouts.dtsi"
+
+&adc {
+  status = "okay";
+};
 
 / {
     chosen {
@@ -47,5 +52,39 @@
             RC(0, 0) RC(0, 1) RC(0, 2)
             RC(1, 0) RC(1, 1) RC(1, 2)
         >;
+    };
+
+    joy: analog_joystick {
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;
+
+        x-ch {
+            io-channels = <&adc 0>;     // ← A0がここ（仮）
+            mv-mid = <1650>;            // 3.3Vの中央付近（後で調整）
+            mv-min-max = <1600>;
+            mv-deadzone = <20>;         // まずは大きめに
+            scale-multiplier = <1>;
+            scale-divisor = <70>;       // 移動量の速さ（後で調整）
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>;
+            /* invert; */               // 逆なら有効化
+        };
+
+        y-ch {
+            io-channels = <&adc 1>;     // ← A1がここ（仮）
+            mv-mid = <1650>;
+            mv-min-max = <1600>;
+            mv-deadzone = <20>;
+            scale-multiplier = <1>;
+            scale-divisor = <70>;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>;
+            /* invert; */
+        };
+    };
+
+    joy_listener: joy_listener {
+        compatible = "zmk,input-listener";
+        device = <&joy>;
     };
 };
