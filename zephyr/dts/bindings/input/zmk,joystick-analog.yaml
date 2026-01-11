@@ -1,0 +1,31 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: Analog joystick input device producing relative X/Y events.
+
+compatible: "zmk,joystick-analog"
+
+include: [base.yaml]
+
+properties:
+  io-channels:
+    required: true
+    type: phandle-array
+
+  poll-interval-ms:
+    type: int
+    default: 10
+
+  deadzone:
+    type: int
+    default: 100
+
+  scale-divisor:
+    type: int
+    default: 128
+
+  invert-x:
+    type: boolean
+
+  invert-y:
+    type: boolean
