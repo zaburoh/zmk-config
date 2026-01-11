@@ -6,4 +6,10 @@ config ZMK_KEYBOARD_NAME
 config ZMK_POINTING
     default y
 
+config ADC
+    default y
+
+config ADC_NRFX_SAADC
+    default y
+
 endif # SHIELD_ZABUROH_STICK
