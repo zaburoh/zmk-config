@@ -8,9 +8,21 @@ compatible: "zmk,joystick-analog"
 include: [base.yaml]
 
 properties:
-  io-channels:
+  x-adc:
     required: true
-    type: phandle-array
+    type: phandle
+
+  x-channel:
+    required: true
+    type: int
+
+  y-adc:
+    required: true
+    type: phandle
+
+  y-channel:
+    required: true
+    type: int
 
   poll-interval-ms:
     type: int
