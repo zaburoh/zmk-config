@@ -1,2 +1,2 @@
-config SHIELD_ZABUROH
+config SHIELD_ZABUROH_STICK
     def_bool $(shields_list_contains,zaburoh_stick)
