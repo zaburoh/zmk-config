@@ -51,10 +51,7 @@
 
     joystick0: joystick0 {
         compatible = "zmk,joystick-analog";
-        x-adc = <&adc>;
-        x-channel = <0>;
-        y-adc = <&adc>;
-        y-channel = <1>;
+        io-channels = <&adc 0>, <&adc 1>;
         poll-interval-ms = <10>;
         deadzone = <100>;
         scale-divisor = <128>;

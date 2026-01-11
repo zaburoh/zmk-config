@@ -19,10 +19,8 @@
 LOG_MODULE_REGISTER(zmk_joystick_analog, CONFIG_ZMK_LOG_LEVEL);
 
 struct joystick_config {
-    const struct device *x_adc;
-    const struct device *y_adc;
-    uint8_t x_channel;
-    uint8_t y_channel;
+    struct adc_dt_spec x_adc;
+    struct adc_dt_spec y_adc;
     uint16_t poll_interval_ms;
     uint16_t deadzone;
     uint16_t scale_divisor;
@@ -30,34 +28,34 @@ struct joystick_config {
     bool invert_y;
 };
 
-struct joystick_axis_data {
-    struct adc_channel_cfg cfg;
-    struct adc_sequence seq;
-    int16_t sample;
-};
-
 struct joystick_data {
     const struct device *dev;
     struct k_work_delayable work;
     int32_t center_x;
     int32_t center_y;
-    struct joystick_axis_data x;
-    struct joystick_axis_data y;
 };
 
 static uint16_t poll_interval_or_default(uint16_t interval_ms) {
     return interval_ms > 0 ? interval_ms : 10;
 }
 
-static int joystick_read_axis(const struct device *adc, struct joystick_axis_data *axis,
-                              int16_t *out) {
-    int err = adc_read(adc, &axis->seq);
-    axis->seq.calibrate = false;
+static int joystick_read_axis(const struct adc_dt_spec *spec, int16_t *out) {
+    int16_t buf = 0;
+    struct adc_sequence sequence = {
+        .buffer = &buf,
+        .buffer_size = sizeof(buf),
+    };
+    int err = adc_sequence_init_dt(spec, &sequence);
     if (err < 0) {
         return err;
     }
 
-    *out = axis->sample;
+    err = adc_read(spec->dev, &sequence);
+    if (err < 0) {
+        return err;
+    }
+
+    *out = buf;
     return 0;
 }
 
@@ -68,11 +66,11 @@ static int joystick_calibrate(const struct joystick_config *cfg, struct joystick
     for (int i = 0; i < 8; i++) {
         int16_t raw_x = 0;
         int16_t raw_y = 0;
-        int err = joystick_read_axis(cfg->x_adc, &data->x, &raw_x);
+        int err = joystick_read_axis(&cfg->x_adc, &raw_x);
         if (err < 0) {
             return err;
         }
-        err = joystick_read_axis(cfg->y_adc, &data->y, &raw_y);
+        err = joystick_read_axis(&cfg->y_adc, &raw_y);
         if (err < 0) {
             return err;
         }
@@ -129,8 +127,8 @@ static void joystick_work_cb(struct k_work *work) {
 
     int16_t raw_x = 0;
     int16_t raw_y = 0;
-    if (joystick_read_axis(cfg->x_adc, &data->x, &raw_x) < 0 ||
-        joystick_read_axis(cfg->y_adc, &data->y, &raw_y) < 0) {
+    if (joystick_read_axis(&cfg->x_adc, &raw_x) < 0 ||
+        joystick_read_axis(&cfg->y_adc, &raw_y) < 0) {
         k_work_schedule(&data->work, K_MSEC(poll_interval_or_default(cfg->poll_interval_ms)));
         return;
     }
@@ -156,53 +154,17 @@ static int joystick_init(const struct device *dev) {
     const struct joystick_config *cfg = dev->config;
     struct joystick_data *data = dev->data;
 
-    if (!device_is_ready(cfg->x_adc) || !device_is_ready(cfg->y_adc)) {
+    if (!adc_is_ready_dt(&cfg->x_adc) || !adc_is_ready_dt(&cfg->y_adc)) {
         LOG_ERR("ADC device not ready");
         return -ENODEV;
     }
 
-#ifdef CONFIG_ADC_NRFX_SAADC
-    data->x.cfg = (struct adc_channel_cfg){
-        .gain = ADC_GAIN_1_6,
-        .reference = ADC_REF_INTERNAL,
-        .acquisition_time = ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40),
-        .channel_id = cfg->x_channel,
-        .input_positive = SAADC_CH_PSELP_PSELP_AnalogInput0 + cfg->x_channel,
-    };
-    data->y.cfg = (struct adc_channel_cfg){
-        .gain = ADC_GAIN_1_6,
-        .reference = ADC_REF_INTERNAL,
-        .acquisition_time = ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40),
-        .channel_id = cfg->y_channel,
-        .input_positive = SAADC_CH_PSELP_PSELP_AnalogInput0 + cfg->y_channel,
-    };
-
-    data->x.seq = (struct adc_sequence){
-        .channels = BIT(cfg->x_channel),
-        .buffer = &data->x.sample,
-        .buffer_size = sizeof(data->x.sample),
-        .oversampling = 4,
-        .resolution = 12,
-        .calibrate = true,
-    };
-    data->y.seq = (struct adc_sequence){
-        .channels = BIT(cfg->y_channel),
-        .buffer = &data->y.sample,
-        .buffer_size = sizeof(data->y.sample),
-        .oversampling = 4,
-        .resolution = 12,
-        .calibrate = true,
-    };
-#else
-#error Unsupported ADC
-#endif
-
-    int err = adc_channel_setup(cfg->x_adc, &data->x.cfg);
+    int err = adc_channel_setup_dt(&cfg->x_adc);
     if (err < 0) {
         LOG_ERR("Failed to setup X axis ADC channel (%d)", err);
         return err;
     }
-    err = adc_channel_setup(cfg->y_adc, &data->y.cfg);
+    err = adc_channel_setup_dt(&cfg->y_adc);
     if (err < 0) {
         LOG_ERR("Failed to setup Y axis ADC channel (%d)", err);
         return err;
@@ -224,10 +186,8 @@ static int joystick_init(const struct device *dev) {
 #define JOYSTICK_ANALOG_INST(n)                                                                    \
     static struct joystick_data joystick_data_##n = {};                                            \
     static const struct joystick_config joystick_config_##n = {                                    \
-        .x_adc = DEVICE_DT_GET(DT_INST_PHANDLE(n, x_adc)),                                          \
-        .y_adc = DEVICE_DT_GET(DT_INST_PHANDLE(n, y_adc)),                                          \
-        .x_channel = DT_INST_PROP(n, x_channel),                                                    \
-        .y_channel = DT_INST_PROP(n, y_channel),                                                    \
+        .x_adc = ADC_DT_SPEC_GET_BY_IDX(DT_DRV_INST(n), 0),                                         \
+        .y_adc = ADC_DT_SPEC_GET_BY_IDX(DT_DRV_INST(n), 1),                                         \
         .poll_interval_ms = DT_PROP_OR(DT_DRV_INST(n), poll_interval_ms, 10),                       \
         .deadzone = DT_PROP_OR(DT_DRV_INST(n), deadzone, 100),                                      \
         .scale_divisor = DT_PROP_OR(DT_DRV_INST(n), scale_divisor, 128),                            \
