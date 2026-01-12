@@ -62,7 +62,7 @@
             io-channels = <&adc 0>;     // ← A0がここ（仮）
             mv-mid = <1600>;            // 3.3Vの中央付近（後で調整）
             mv-min-max = <1600>;
-            mv-deadzone = <120>;         // まずは大きめに
+            mv-deadzone = <150>;         // まずは大きめに
             scale-multiplier = <1>;
             scale-divisor = <70>;       // 移動量の速さ（後で調整）
             evt-type = <INPUT_EV_REL>;
@@ -72,9 +72,9 @@
 
         y-ch {
             io-channels = <&adc 1>;     // ← A1がここ（仮）
-            mv-mid = <1610>;
+            mv-mid = <1600>;
             mv-min-max = <1600>;
-            mv-deadzone = <120>;
+            mv-deadzone = <150>;
             scale-multiplier = <1>;
             scale-divisor = <70>;
             evt-type = <INPUT_EV_REL>;
