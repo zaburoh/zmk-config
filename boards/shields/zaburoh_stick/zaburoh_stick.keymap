@@ -8,6 +8,14 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    behaviors {
+        scroll_encoder: scroll_encoder {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+        };
+    };
+
     // Define a default keymap here.
     // See https://zmk.dev/docs/development/hardware-integration/new-shield#default-keymap.
     keymap {
@@ -15,7 +23,15 @@
 
         default_layer {
             bindings = <
-                &studio_unlock &kp A &kp B &mkp LCLK &mkp MCLK &mkp RCLK
+                &mkp LCLK &mkp RCLK &mkp MCLK &mkp MB4 &mkp MB5 &tg 1
+            >;
+
+            sensor-bindings = <&scroll_encoder>;
+        };
+
+        music_layer {
+            bindings = <
+                &kp C_PREV &kp C_PLAY_PAUSE &kp C_NEXT &kp C_MUTE &kp C_VOL_DN &to 0
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
