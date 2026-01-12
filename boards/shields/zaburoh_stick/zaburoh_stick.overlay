@@ -72,7 +72,7 @@
 
         y-ch {
             io-channels = <&adc 1>;     // ← A1がここ（仮）
-            mv-mid = <1670>;
+            mv-mid = <1660>;
             mv-min-max = <1600>;
             mv-deadzone = <100>;
             scale-multiplier = <1>;
