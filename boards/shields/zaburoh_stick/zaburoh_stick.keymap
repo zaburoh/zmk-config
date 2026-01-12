@@ -17,6 +17,10 @@
             bindings = <
                 &studio_unlock &kp A &kp B &mkp LCLK &mkp MCLK &mkp RCLK
             >;
+
+            encoder-bindings = <
+                &msc SCRL_DOWN &msc SCRL_UP
+            >;
         };
     };
 };

@@ -87,4 +87,16 @@
         compatible = "zmk,input-listener";
         device = <&joy>;
     };
+
+    encoders {
+        compatible = "zmk,encoders";
+
+        encoder0: encoder_0 {
+            compatible = "zmk,encoder";
+            label = "ENCODER_0";
+            a-gpios = <&xiao_d 4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            b-gpios = <&xiao_d 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            resolution = <4>;
+        };
+    };
 };
