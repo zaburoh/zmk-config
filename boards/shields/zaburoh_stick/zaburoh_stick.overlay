@@ -88,15 +88,17 @@
         device = <&joy>;
     };
 
-    encoders {
-        compatible = "zmk,encoders";
+    left_encoder: encoder_left {
+        compatible = "alps,ec11";
+        a-gpios = <<&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <<&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <24>;
+        status = "okay";
+    };
 
-        encoder0: encoder_0 {
-            compatible = "zmk,encoder";
-            label = "ENCODER_0";
-            a-gpios = <&xiao_d 4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-            b-gpios = <&xiao_d 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-            resolution = <4>;
-        };
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <24>;
     };
 };

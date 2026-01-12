@@ -18,9 +18,7 @@
                 &studio_unlock &kp A &kp B &mkp LCLK &mkp MCLK &mkp RCLK
             >;
 
-            encoder-bindings = <
-                &msc SCRL_DOWN &msc SCRL_UP
-            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 };

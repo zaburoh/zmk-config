@@ -24,4 +24,10 @@ config ANALOG_INPUT_LOG_DBG_RAW
 config LOG_DEFAULT_LEVEL
     default 3
 
+config EC11
+    default y
+
+config EC11_TRIGGER_GLOBAL_THREAD
+    default y
+
 endif # SHIELD_ZABUROH_STICK
