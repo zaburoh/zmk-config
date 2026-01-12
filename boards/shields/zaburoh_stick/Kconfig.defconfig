@@ -21,4 +21,10 @@ config ANALOG_INPUT
 config ANALOG_INPUT_LOG_DBG_RAW
     default y
 
+confit LOG
+    default y
+
+config LOG_DEFAULT_LEVEL
+    default 3
+
 endif # SHIELD_ZABUROH_STICK
