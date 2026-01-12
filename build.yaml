@@ -115,9 +115,8 @@ include:
 
   - board: seeeduino_xiao_ble
     shield: zaburoh_stick
-    snippet: 
-      - studio-rpc-usb-uart
-      - zmk-usb-logging
+    # snippet: studio-rpc-usb-uart
+    snippet: zmk-usb-logging
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
   - board: seeeduino_xiao_ble
