@@ -23,7 +23,7 @@
 
         default_layer {
             bindings = <
-                &mkp LCLK &mkp RCLK &mkp MCLK &mkp MB4 &mkp MB5 &tg 1
+                &mkp LCLK &mkp RCLK &mkp MCLK &mkp MB4 &mkp MB5 &tog 1
             >;
 
             sensor-bindings = <&scroll_encoder>;
