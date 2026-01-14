@@ -1,3 +1,6 @@
 build:
+  cmake: modules/keyball39_pmw3360
+  kconfig: modules/keyball39_pmw3360/Kconfig
   settings:
     board_root: .
+    dts_root: modules/keyball39_pmw3360
