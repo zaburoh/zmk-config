@@ -1,0 +1,18 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: PMW3360 optical sensor input device over SPI
+
+compatible: "zmk,pmw3360"
+
+include: [spi-device.yaml]
+
+properties:
+  polling-interval-ms:
+    type: int
+    default: 4
+    description: Polling interval in milliseconds.
+  cpi:
+    type: int
+    default: 500
+    description: CPI setting in counts per inch (e.g. 500, 1000).

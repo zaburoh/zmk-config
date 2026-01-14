@@ -124,6 +124,8 @@ include:
 
   - board: nice_nano
     shield: keyball39_left
+    cmake-args: -DZMK_EXTRA_MODULES=${ZMK_CONFIG}/modules/keyball39_pmw3360
 
   - board: nice_nano
     shield: keyball39_right
+    cmake-args: -DZMK_EXTRA_MODULES=${ZMK_CONFIG}/modules/keyball39_pmw3360

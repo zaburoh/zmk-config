@@ -1,0 +1,7 @@
+config ZMK_INPUT_PMW3360
+    bool "PMW3360 input device"
+    default y
+    depends on DT_HAS_ZMK_PMW3360_ENABLED
+    select SPI
+    help
+      Enable the PMW3360 SPI input device driver.

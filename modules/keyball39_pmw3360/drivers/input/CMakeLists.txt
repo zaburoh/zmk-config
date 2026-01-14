@@ -1,0 +1,2 @@
+zephyr_library()
+zephyr_library_sources_ifdef(CONFIG_ZMK_INPUT_PMW3360 pmw3360.c)
