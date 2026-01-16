@@ -8,11 +8,7 @@
 - `Trackball_circuit.*`: Hardware reference assets.
 
 ## Build, Test, and Development Commands
-These commands assume this repo is the West workspace `config/` folder.
-- `west update`: Syncs ZMK and module dependencies from `config/west.yml`.
-- `west build -s zmk/app -d build/keyball39_left -b nice_nano -- -DSHIELD=keyball39_left`: Build left half firmware.
-- `west build -s zmk/app -d build/keyball39_right -b nice_nano -- -DSHIELD=keyball39_right`: Build right half firmware.
-- `west build -t pristine`: Cleans a build directory (run inside `build/...`).
+- To Build run by GitHub Actions
 
 ## Coding Style & Naming Conventions
 - Device tree overlays and keymaps follow ZMK style; keep 4-space indentation and trailing semicolons.
