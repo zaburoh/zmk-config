@@ -1,6 +1,4 @@
 #include "keyball39.dtsi"
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
     col-offset = <6>;
@@ -17,20 +15,6 @@
         ;
 };
 
-&pro_micro_spi {
-    status = "okay";
-    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
-
-    keyball39_trackball: pmw3360@0 {
-        compatible = "zmk,pmw3360";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        polling-interval-ms = <4>;
-        cpi = <500>;
-    };
-};
-
 &keyball39_trackball_split {
-    device = <&keyball39_trackball>;
-    input-processors = <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>;
+    status = "disabled";
 };
