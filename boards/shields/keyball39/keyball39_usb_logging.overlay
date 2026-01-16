@@ -1,0 +1,16 @@
+/*
+ * USB logging console for keyball39 when using ZMK_USB_LOGGING.
+ */
+
+/ {
+    chosen {
+        zephyr,console = &keyball39_usb_logging_uart;
+        zephyr,shell-uart = &keyball39_usb_logging_uart;
+    };
+};
+
+&zephyr_udc0 {
+    keyball39_usb_logging_uart: keyball39_usb_logging_uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
