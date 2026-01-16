@@ -14,3 +14,7 @@
 &keyball39_trackball_listener {
     status = "disabled";
 };
+
+&keyball39_trackball_split {
+    status = "disabled";
+};
