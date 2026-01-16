@@ -16,10 +16,4 @@ if SHIELD_KEYBALL39_LEFT || SHIELD_KEYBALL39_RIGHT
 config ZMK_SPLIT
     default y
 
-config INPUT
-    default y
-
-config SPI
-    default y
-
 endif # SHIELD_KEYBALL39_LEFT || SHIELD_KEYBALL39_RIGHT
