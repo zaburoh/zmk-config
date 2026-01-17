@@ -8,22 +8,6 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
-    macros {
-        btclr_macro: btclr_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&macro_tap &bt BT_CLR 0>;
-        };
-    };
-
-    behaviors {
-        btclr_mt: btclr_mt {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&kp>, <&btclr_macro>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -32,8 +16,17 @@
                 &kp Q     &kp W     &kp E     &kp R     &kp T               &kp Y     &kp U     &kp I     &kp O     &kp P
                 &kp A     &kp S     &kp D     &kp F     &kp G               &kp H     &kp J     &kp K     &kp L     &kp SEMI
                 &kp Z     &kp X     &kp C     &kp V     &kp B               &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH
-                &kp LCTRL &kp LGUI  &kp LALT  &kp TAB   &kp SPACE &kp BSPC  &kp RET   &kp DEL                       &btclr_mt LCTRL 0
+                &kp LCTRL &kp LGUI  &kp LALT  &kp TAB   &lt 1 SPACE &kp BSPC  &kp RET   &kp DEL                       &kp ESC
             >;
         };
+
+        bluetooth_layer {
+            bindings = <
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &bt BT_PRV &bt BT_NXT &out OUT_USB &out OUT_BLE &bt BT_CLR
+                &bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_DISC 4   &bt BT_CLR_ALL &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans                                               &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans  &trans &trans                           &trans
+            >;
+        }
     };
 };
